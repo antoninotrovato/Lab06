@@ -24,7 +24,6 @@ class View:
         # Elementi UI
         self.txt_titolo = None
         self.txt_responsabile = None
-
         # Non obbligatorio mettere già qui tutti gli elementi UI
 
     def show_alert(self, messaggio):
@@ -45,7 +44,7 @@ class View:
             size=16,
             weight=ft.FontWeight.BOLD
         )
-
+        self.txt_strumenti = ft.Text(value="Strumenti", size=20)
         # TextField per responsabile
         self.input_responsabile = ft.TextField(value=self.controller.get_responsabile(), label="Responsabile")
 
@@ -64,7 +63,8 @@ class View:
 
         # Altri Pulsanti da implementare (es. "Mostra" e "Cerca")
         # TODO
-
+        self.btn_mostra = ft.Button("Mostra", on_click= self.controller.mostra)
+        self.btn_cerca = ft.Button("Cerca", on_click= self.controller.cerca)
         # --- LAYOUT ---
         self.page.add(
             self.toggle_cambia_tema,
@@ -83,9 +83,17 @@ class View:
 
             # Sezione 3
             # TODO
-
+            ft.Row(controls = [self.txt_strumenti, self.btn_mostra],
+                   alignment = ft.MainAxisAlignment.START),
+            self.lista_strumenti,
+            ft.Text("\n\n\n"),
+            ft.Divider(),
             # Sezione 4
             # TODO
+            ft.Text("Cerca Strumento per Tipo", size=20),
+            ft.Row(controls=[self.input_tipo_strumento, self.btn_cerca]),
+            self.lista_strumenti_ricerca
+
         )
 
     def cambia_tema(self, e):
